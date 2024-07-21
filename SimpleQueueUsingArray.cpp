@@ -6,11 +6,12 @@ void enqueue(){
     int val;
     cout<<"Enter the value to be inserted : ";
     cin>>val;
-    if((rear+1)%n==front){  //front is at index 0
+    if(rear == n-1){  
         cout<<"Overflow";
+        return;
     }
     else{
-        if(front==-1){   //if the element is the first element to be inserted
+        if(front==-1 && rear==-1){   //if the element is the first element to be inserted
             front=rear=0;
         }else{
             rear=rear+1;
@@ -22,15 +23,16 @@ void enqueue(){
 }
 
 void dequeue(){
-    if(front==-1){
+    if(front==-1 || front > rear){
         cout<<"Underflow";
+        return;
     }
     else{
         if(front==rear){
             front=rear=-1;
         }
         else{
-            front=(front+1)%n;
+            front=front+1;
         }
     }
 
@@ -43,7 +45,7 @@ void display(){
     }
     else{
         cout<<"Elements of queue are:";
-        for(int i = front ; i!=rear ; i=(i+1)%n){
+        for(int i = front ; i!=rear ; i=i+1){
             cout<<queue[i]<<" ";
         }
         cout<<queue[rear]<<" ";
