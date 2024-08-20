@@ -1,35 +1,38 @@
 #include<iostream>
-using namespace std;
-int linearSearch(int arr[],int n,int target);
+using namespace std ;
 
-int main(){
-    int n , i;
-    cout<<"Enter the number of elements of array: "<<endl;
+int linearSearch(int n,int arr[],int target){
+    for(int i = 0 ; i < n ; i++){
+        if(arr[i]==target){
+            return i;
+        }
+    }
+    return -1 ; 
+
+}
+
+ int main(){
+    int n ;
+    cout << "Enter the number of elements :\n";
     cin>>n;
     int arr[n];
-    cout<<"Enter the elements of array"<<endl;
+    cout<<"Enter the array elements :\n";
     for(int i = 0 ; i < n ; i++){
         cin>>arr[i];
     }
-    int target;
-    cout<<"Enter the element to be searched:"<<endl;
+    int target ;
+    cout<<"Enter the element to be searched :\n";
     cin>>target;
-    int result = linearSearch(arr , n , target);
-    if(result == -1){
-        cout<<"Element not found"<<endl;
-    }
-    else{
-        cout<<"Element found at :"<<result<<endl;
-    }
-    return 0;
-}
 
-int linearSearch(int arr[], int n , int target){
-    for(int i = 0 ; i< n ; i++){
-        if(arr[i] == target){
-            return i+1 ; 
-        }
+    int res = linearSearch(n,arr,target);
+
+    if(res==-1){
+       cout<<"Element not found";
         
     }
-    return -1 ;
-}
+    else{
+        cout<<"Element found at index ";
+        cout<<res; 
+    }
+    return 0;
+ }
