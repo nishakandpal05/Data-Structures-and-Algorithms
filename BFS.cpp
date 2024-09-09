@@ -1,55 +1,48 @@
-#include <iostream>
-#include <vector>
-#include <queue>
+#include<iostream>
+#include<vector>
+#include<queue>
 using namespace std;
 
-void bfs(vector<vector<int> >& graph, int start) {
-    int n = graph.size();
-    vector<bool> visited(n, false);
-    queue<int> q;
-
-    visited[start] = true;
-    q.push(start);
-
-    cout << "BFS Traversal: ";
-    while (!q.empty()) {
-        int current = q.front();
+void bfs(vector<vector<int> >& graph , int src , int v){
+    vector<int>visited(v,0);
+    queue<int>q;
+    q.push(src);
+    visited[src]=1;
+    while(!q.empty()){
+        int temp = q.front();
         q.pop();
-        cout << current << " ";
-
-        for (int neighbor : graph[current]) {
-            if (!visited[neighbor]) {
-                visited[neighbor] = true;
-                q.push(neighbor);
+        cout<<temp;
+        for(int i : graph[temp]){
+            if(visited[i]==0){
+                q.push(i);
+                visited[i]=1;
             }
         }
     }
-    cout << endl;
+
 }
 
-int main() {
-    int vertices, edges, start;
-    cout << "Enter the number of vertices: ";
-    cin >> vertices;
-
-    cout << "Enter the number of edges: ";
-    cin >> edges;
-
-    vector<vector<int> > graph(vertices);
-
-    cout << "Enter edges (from to):" << endl;
-    for (int i = 0; i < edges; ++i) {
-        int from, to;
-        cin >> from >> to;
-
+int main(){
+    int v,e;
+    cout<<"Enter the number of vertex and edges :";
+    cin>>v>>e;
+    cout<<"\n";
+    vector<vector<int> >graph(v);
+    cout<<"Enter the edges of the graph :";
+    for(int i = 0 ; i < e ; i++){
+        int from,to;
+        cin>>from>>to;
         graph[from].push_back(to);
-        graph[to].push_back(from); 
+        graph[to].push_back(from);
     }
+    cout<<"\n";
+    int src;
+    cout<<"Enter the source vertex :";
+    cin>>src;
+    cout<<"\n";
 
-    cout << "Enter the starting vertex for BFS: ";
-    cin >> start;
-
-    bfs(graph, start);
+    bfs(graph,src,v);
 
     return 0;
+
 }
